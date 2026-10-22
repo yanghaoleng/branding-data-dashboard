@@ -1,0 +1,33 @@
+{
+  "server": "https://mikeywa.site/brandingdatabse/api",
+  "tokenEnv": "BRANDING_COLLECTOR_TOKEN",
+  "accounts": [
+    {
+      "key": "douyin:REPLACE_WITH_STABLE_ID",
+      "profileDir": "../.local/profiles/douyin-main",
+      "url": "https://creator.douyin.com/creator-micro/content/manage",
+      "source": "creator_visible_page",
+      "expectedAccountText": "REPLACE_WITH_VISIBLE_ACCOUNT_ID",
+      "selectors": {
+        "identity": "REPLACE_WITH_ACCOUNT_ID_SELECTOR",
+        "login": "input[type=password]",
+        "blocked": "REPLACE_WITH_ACCESS_RESTRICTION_SELECTOR",
+        "row": "REPLACE_WITH_CONTENT_CARD_SELECTOR",
+        "idAttribute": "data-id",
+        "title": "REPLACE_WITH_TITLE_SELECTOR",
+        "publishedAt": "REPLACE_WITH_DATE_SELECTOR",
+        "url": "a[href*='/video/']",
+        "views": "REPLACE_WITH_VIEWS_SELECTOR",
+        "likes": "REPLACE_WITH_LIKES_SELECTOR",
+        "comments": "REPLACE_WITH_COMMENTS_SELECTOR",
+        "saves": "REPLACE_WITH_SAVES_SELECTOR",
+        "shares": "REPLACE_WITH_SHARES_SELECTOR",
+        "next": "REPLACE_WITH_NEXT_PAGE_SELECTOR"
+      },
+      "viewMetric": "play_count",
+      "contentType": "video",
+      "na": [],
+      "maxPages": 30
+    }
+  ]
+}
