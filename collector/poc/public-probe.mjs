@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+/** Explicitly requested public-crawler PoC. Fresh browser, no supplied credentials,
+ * no CAPTCHA solving, no private API requests, no identity/fingerprint changes. */
+import{CheerioCrawler,PlaywrightCrawler,Configuration,log}from'crawlee';
+import{chromium}from'playwright';
+import fs from'node:fs/promises';import path from'node:path';import{fileURLToPath}from'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
+const mode=process.argv[2]||'http';const run=new Date().toISOString().replaceAll(/[:.]/g,'-');const out=path.join(root,'.local/public-probe',run+'-'+mode);await fs.mkdir(out,{recursive:true,mode:0o700});
+process.env.CRAWLEE_STORAGE_DIR=path.join(out,'storage');log.setLevel(log.LEVELS.ERROR);
+const targets=[{key:'douyin-brand',platform:'douyin',url:'https://v.douyin.com/kwCDioKwvBc/'},{key:'xiaohongshu-brand',platform:'xiaohongshu',url:'https://xhslink.cn/o/9pMV7WqV74C'},{key:'xiaohongshu-fish',platform:'xiaohongshu',url:'https://xhslink.cn/o/9sEW1FFVJLM'}];
+const activeTargets=process.env.BRANDING_PROBE_TARGET?targets.filter(t=>t.key===process.env.BRANDING_PROBE_TARGET):targets;
+const results=[];const safeURL=s=>{try{const u=new URL(s);return u.origin+u.pathname}catch{return s}};
+const save=async(key,name,content)=>fs.writeFile(path.join(out,key+'-'+name),content,{mode:0o600});
+async function report(target,url,title,text,html,extra={}){await save(target.key,'body.txt',text);await save(target.key,'page.html',html);const login=/\/login(?:[/?]|$)/.test(url)||/扫码登录|手机号登录|登录后查看更多|登录后查看/.test(text);const verification=/captcha|challenge|verify/.test(new URL(url).pathname)||/请完成验证|安全验证|拖动滑块|访问过于频繁|请求过于频繁/.test(text);const r={key:target.key,platform:target.platform,method:mode,collectedAt:new Date().toISOString(),finalUrl:safeURL(url),title,textLength:text.length,htmlBytes:Buffer.byteLength(html),loginDetected:login,verificationDetected:verification,...extra};results.push(r);console.log(JSON.stringify(r));}
+const common={maxConcurrency:1,maxRequestRetries:0,maxRequestsPerCrawl:3,useSessionPool:false,requestHandlerTimeoutSecs:45,failedRequestHandler:async({request},error)=>{const r={key:request.userData.key,method:mode,status:'failed',reason:error.name||'Error',message:String(error.message).replace(/https?:\/\/\S+/g,'[URL]').slice(0,220)};results.push(r);console.log(JSON.stringify(r))}};
+if(mode==='http'){
+ const c=new CheerioCrawler({...common,ignoreSslErrors:false,requestHandler:async({request,$,body,response})=>{await report(request.userData,request.loadedUrl||request.url,$('title').text(),$('body').clone().find('script,style,noscript').remove().end().text().replace(/\s+/g,' ').slice(0,30000),String(body),{status:response.statusCode})}},new Configuration({persistStorage:false}));await c.run(activeTargets.map(t=>({url:t.url,userData:t})));
+}else{
+ const c=new PlaywrightCrawler({...common,navigationTimeoutSecs:25,browserPoolOptions:{useFingerprints:false},launchContext:{launcher:chromium,launchOptions:{executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true}},preNavigationHooks:[async(ctx,opts)=>{opts.waitUntil='domcontentloaded'}],requestHandler:async({request,page,response})=>{await page.waitForTimeout(4000);if(request.userData.platform==='douyin'&&await page.locator('.YoNA2Hyj.qKr0RhiL').count()){await page.locator('.YoNA2Hyj.qKr0RhiL').click();await page.waitForTimeout(2500)}const text=await page.locator('body').innerText({timeout:8000});const html=await page.content();await page.screenshot({path:path.join(out,request.userData.key+'-screen.png'),fullPage:false});await report(request.userData,page.url(),await page.title(),text,html,{status:response?.status(),links:await page.locator('a[href]').evaluateAll(els=>els.map(el=>({text:(el.textContent||'').trim().slice(0,100),href:el.getAttribute('href')})).filter(a=>/user\/profile|\/user\/|\/explore\/|\/video\//.test(a.href)).slice(0,25))})}},new Configuration({persistStorage:false}));await c.run(activeTargets.map(t=>({url:t.url,userData:t})));
+}
+await fs.writeFile(path.join(out,'results.json'),JSON.stringify(results,null,2),{mode:0o600});console.log(JSON.stringify({evidenceDirectory:out,results:results.length}));

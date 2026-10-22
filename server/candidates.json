@@ -1,6 +1,32 @@
 [
- {"platform":"douyin","name":"叫叫阅读官方旗舰店","id":"","profileUrl":"","evidenceUrl":"https://www.douyin.com/video/7678164092519025930","note":"平台公开作品页出现此作者名。待核实品牌归属、主页及稳定账号 ID；搜索摘要不作指标快照。","discoveredAt":"2026-10-22"},
- {"platform":"douyin","name":"叫叫读写实验室","id":"","profileUrl":"","evidenceUrl":"https://www.douyin.com/video/7673285530074828051","note":"平台公开作品页出现此作者名。待核实品牌归属与稳定账号 ID。","discoveredAt":"2026-10-22"},
- {"platform":"xiaohongshu","name":"JOJO / 叫叫 · 待检索核实","id":"","profileUrl":"","evidenceUrl":"https://www.xiaohongshu.com/search_result?keyword=%E5%8F%AB%E5%8F%AB&type=51","note":"已检索公开网页，尚未找到可核验的账号主页。保留平台内搜索入口，不凭昵称推定官方身份。","discoveredAt":"2026-10-22"},
- {"platform":"channels","name":"JOJO / 叫叫 · 视频号待核实","id":"","profileUrl":"","evidenceUrl":"https://channels.weixin.qq.com/","note":"公开网页未找到稳定主页与账号 ID。需微信内检索核实；完整指标优先使用有权管理的创作者助手。","discoveredAt":"2026-10-22"}
+  {
+    "platform": "douyin",
+    "name": "叫叫阅读官方账号",
+    "id": "MS4wLjABAAAArqoCIlYWEMwRDHIFU4y4JlElhZqtUDgvludpOflFDhMH4mX4GAhKwNoteF5Iu_K4",
+    "profileUrl": "https://www.douyin.com/user/MS4wLjABAAAArqoCIlYWEMwRDHIFU4y4JlElhZqtUDgvludpOflFDhMH4mX4GAhKwNoteF5Iu_K4",
+    "evidenceUrl": "https://www.douyin.com/user/MS4wLjABAAAArqoCIlYWEMwRDHIFU4y4JlElhZqtUDgvludpOflFDhMH4mX4GAhKwNoteF5Iu_K4",
+    "note": "已通过用户提供链接核实主页。仅取得账号级公开数据，作品列表尚未成功。",
+    "discoveredAt": "2026-10-22",
+    "identityResolved": true
+  },
+  {
+    "platform": "xiaohongshu",
+    "name": "叫叫阅读官方账号",
+    "id": "5fbcc45d000000000101de0a",
+    "profileUrl": "https://www.xiaohongshu.com/user/profile/5fbcc45d000000000101de0a",
+    "evidenceUrl": "https://www.xiaohongshu.com/user/profile/5fbcc45d000000000101de0a",
+    "note": "已通过用户提供链接核实主页。取得32条首屏笔记预览，作品ID为空，不能用于正式去重。",
+    "discoveredAt": "2026-10-22",
+    "identityResolved": true
+  },
+  {
+    "platform": "xiaohongshu",
+    "name": "叫你摸会儿鱼",
+    "id": "67b2cbf0000000000d00986a",
+    "profileUrl": "https://www.xiaohongshu.com/user/profile/67b2cbf0000000000d00986a",
+    "evidenceUrl": "https://www.xiaohongshu.com/user/profile/67b2cbf0000000000d00986a",
+    "note": "已通过用户提供链接核实主页。取得32条首屏笔记预览，作品ID为空，不能用于正式去重。",
+    "discoveredAt": "2026-10-22",
+    "identityResolved": true
+  }
 ]

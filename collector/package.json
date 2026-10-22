@@ -1,1 +1,1 @@
-{"name":"branding-local-collector","private":true,"type":"module","dependencies":{"playwright":"^1.56.0"}}
+{"name":"branding-local-collector","private":true,"type":"module","dependencies":{"cheerio":"^1.2.0","crawlee":"^3.18.2","playwright":"^1.56.0"}}
