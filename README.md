@@ -2,6 +2,10 @@
 
 线上路径：<https://mikeywa.site/brandingdatabse/>（按用户指定拼写保留）。
 
+公开仓库：<https://github.com/yanghaoleng/branding-data-dashboard>。
+
+阶段汇报与预验收重点：[2026-10-22进度汇报](docs/progress-report-2026-10-22.md)。部署及当前版本：[部署交接](docs/deployment.md)。完整作品级真实采集尚未验收通过。
+
 首期仅包含自媒体矩阵：抖音、小红书、微信视频号。达人平台数据、媒体发稿、销售归因、日新增传播趋势与AI语义分析不属于本期。
 
 ## 已实现
