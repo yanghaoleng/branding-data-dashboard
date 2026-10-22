@@ -10,10 +10,10 @@
 | 公开真实快照 | https://mikeywa.site/brandingdatabse/?view=public |
 | 健康检查 | https://mikeywa.site/brandingdatabse/api/health |
 | 当前前端/API版本 | 20261022-public-poc |
-| 当前应用代码基线 | 9bd0825 |
+| 当前应用代码基线 | `e237654a218e`（公开历史中对应本次线上应用代码的提交） |
 | 正式空间 | 独立密钥保护；生产密钥通过私有渠道管理 |
 
-`brandingdatabse`按现有指定网址保留拼写。源码仓库后续文档提交不等于新的线上发布；核对部署版本与代码改动范围后再发布。
+`brandingdatabse`按现有指定网址保留拼写。源码仓库后续文档提交不等于新的线上发布；核对部署版本与代码改动范围后再发布。首次公开时仅将提交邮箱替换为GitHub隐藏邮箱，应用源文件内容不变，原本地历史私有备份保留。
 
 ## 架构与部署位置
 
